@@ -467,11 +467,9 @@ sql2 = f"""
  WITH 
  news as (
  SELECT 
-  	  raw_metadata[0]['account_address'] as validator_address,
+  	  voter as validator_address,
       min(trunc(block_timestamp,'day')) as debut
-    FROM osmosis.core.fact_staking
-  	 JOIN osmosis.core.dim_labels ON address = validator_address
-    where currency LIKE 'uosmo'
+    FROM osmosis.core.fact_governance_votes
     GROUP BY 1
 ),
    proposals_info as (
@@ -497,11 +495,9 @@ sql3="""
  WITH 
  news as (
  SELECT 
-  	  raw_metadata[0]['account_address'] as validator_address,
+  	  voter as validator_address,
       min(trunc(block_timestamp,'day')) as debut
-    FROM osmosis.core.fact_staking
-  	 JOIN osmosis.core.dim_labels ON address = validator_address
-    where currency LIKE 'uosmo'
+    FROM osmosis.core.fact_governance_votes
     GROUP BY 1
 ),
    proposals_info as (
@@ -578,18 +574,18 @@ fig3.update_yaxes(title_text="Total new proposals", secondary_y=True)
 st.altair_chart(alt.Chart(df2)
         .mark_bar()
         .encode(x='date:N', y='voters:Q',color='type')
-        .properties(title='Active voters by type of validator over time',width=600))
+        .properties(title='Active voters by type of delegator over time',width=600))
 
 st.altair_chart(alt.Chart(df2)
         .mark_line()
         .encode(x='date:N', y='votes:Q',color='type')
-        .properties(title='Voting activity by type of validator over time',width=600))
+        .properties(title='Voting activity by type of delegator over time',width=600))
 
 # Create figure with secondary y-axis
 st.altair_chart(alt.Chart(df3)
         .mark_line()
         .encode(x='weeks:N', y='avg_votes_per_voter:Q',color='type')
-        .properties(title='Average weekly votes per voter per type of validator',width=600))
+        .properties(title='Average weekly votes per voter per type of delegator',width=600))
 
 
 # In[ ]:
