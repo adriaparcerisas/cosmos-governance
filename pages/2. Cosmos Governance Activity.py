@@ -905,12 +905,12 @@ st.plotly_chart(fig3, theme="streamlit", use_container_width=True)
 
 fig3 = make_subplots(specs=[[{"secondary_y": True}]])
 
-fig3.add_trace(go.Line(x=df5['proposal_id'],
+fig3.add_trace(go.Line(x=df5['date'],
                 y=df5['participants'],
                 name='# of users',
                 marker_color='rgb(255,215,0)'
                 , yaxis='y'))
-fig3.add_trace(go.Line(x=df5['proposal_id'],
+fig3.add_trace(go.Line(x=df5['date'],
                 y=df5['active_users'],
                 name='# of users',
                 marker_color='rgb(255,69,0)'
