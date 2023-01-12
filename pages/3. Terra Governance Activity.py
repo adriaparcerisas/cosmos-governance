@@ -677,7 +677,7 @@ sql2="""
 WITH
   new_wallets as (
   select 
-  distinct tx_from as user,
+  distinct TX_SENDER as user,
   min(block_timestamp) as debut
   from terra.core.fact_transactions
   group by 1
@@ -707,7 +707,7 @@ sql3="""
 WITH
   new_wallets as (
   select 
-  distinct tx_from as user,
+  distinct TX_SENDER as user,
   min(block_timestamp) as debut
   from terra.core.fact_transactions
   group by 1
