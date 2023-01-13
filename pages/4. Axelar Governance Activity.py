@@ -489,6 +489,7 @@ trunc(block_timestamp,'day') as date,
 from proposals_info x
    join news y on voter=validator_address
 group by 1,2 order by 1 asc 
+"""
 
 sql3="""
  WITH 
