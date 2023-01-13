@@ -46,7 +46,7 @@ st.markdown('To do that, we are gonna track the basic activity metrics registere
 st.write('- How did the voting power of the top 66% of the active set validators change')
 st.write('- Power share distribution by validators rank')
 st.write('- How did the Nakamoto Coefficient change?')
-st.write('- Validators activity')
+st.write('- Validators and delegators activity')
 st.write('')
 
 
