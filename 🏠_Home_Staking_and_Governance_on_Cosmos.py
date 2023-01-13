@@ -33,12 +33,12 @@ st.title('Governing the Cosmos')
 
 st.markdown("Cosmos is an ever-expanding ecosystem of interconnected apps and services, built for a decentralized future. Cosmos apps and services connect using IBC, the Inter-Blockchain Communication protocol. This innovation enables you to freely exchange assets and data across sovereign, decentralized blokchains [1](https://cosmos.network/).")
 
-st.markdown("Throughout the cosmos, ecosystem builders are molding the future of their app chain by actively participating in governance and debating actionable measures. Every chain is different so let's take a peak under the hood and compare governance performance on Osmosis, Cosmos, and Terra chains.")
+st.markdown("Throughout the cosmos, ecosystem builders are molding the future of their app chain by actively participating in governance and debating actionable measures. Every chain is different so let's take a peak under the hood and compare governance performance on Osmosis, Cosmos, Terra and Axelar chains.")
 
 st.markdown("So, the question is... How active and engaged are users? How many unique voters are there on each chain? How is voting power distributed? What chain has been the most active in proposals?")
 
 # In[11]:
-st.markdown("The main idea of this app is to show an overview of how the governance is being used and developed on each Cosmos chain to see each performance and activity. You can find information about each different chain by navigating on the sidebar pages.")
+st.markdown("The main idea of this app is to show an overview of how the staking and governance is being used and developed on each Cosmos chain to see each performance and activity. You can find information about each different chain by navigating on the sidebar pages.")
 
 
 # In[12]:
