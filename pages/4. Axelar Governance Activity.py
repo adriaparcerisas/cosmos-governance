@@ -467,11 +467,9 @@ sql2 = f"""
  WITH 
  news as (
  SELECT 
-  	  raw_metadata[0]['account_address'] as validator_address,
+  	  voter as validator_address,
       min(trunc(block_timestamp,'day')) as debut
-    FROM axelar.core.fact_staking
-  	 JOIN axelar.core.dim_labels ON address = validator_address
-    where currency LIKE 'uaxl'
+    FROM axelar.core.fact_governance_votes
     GROUP BY 1
 ),
    proposals_info as (
@@ -484,24 +482,21 @@ SELECT
    )
 SELECT
 trunc(block_timestamp,'day') as date,
-   case when datediff('day',debut,date)<30 then 'New validator'
-   else 'Old validator' end as type,
+   case when datediff('day',debut,date)<30 then 'New delegator'
+   else 'Old delegator' end as type,
    count(distinct voter) as voters,
    count(distinct tx_id) as votes
 from proposals_info x
    join news y on voter=validator_address
 group by 1,2 order by 1 asc 
-  """
 
 sql3="""
  WITH 
  news as (
  SELECT 
-  	  raw_metadata[0]['account_address'] as validator_address,
+  	  voter as validator_address,
       min(trunc(block_timestamp,'day')) as debut
-    FROM axelar.core.fact_staking
-  	 JOIN axelar.core.dim_labels ON address = validator_address
-    where currency LIKE 'uaxl'
+    FROM axelar.core.fact_governance_votes
     GROUP BY 1
 ),
    proposals_info as (
@@ -515,8 +510,8 @@ SELECT
    final as (
 SELECT
 trunc(block_timestamp,'day') as date,
-   case when datediff('day',debut,date)<30 then 'New validator'
-   else 'Old validator' end as type,
+   case when datediff('day',debut,date)<30 then 'New delegator'
+   else 'Old delegator' end as type,
    voter,
    count(distinct tx_id) as votes
 from proposals_info x
