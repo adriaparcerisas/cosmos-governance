@@ -62,7 +62,7 @@ stakes1 as (
     REDELEGATE_SOURCE_VALIDATOR_ADDRESS as validator,
     (amount / power(10,6))*(-1) as staked
   FROM axelar.core.fact_staking
-  where currency LIKE 'uosmo'
+  where currency LIKE 'uaxl'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is not null
 ),
    stakes2 as (
@@ -73,7 +73,7 @@ stakes1 as (
     CASE WHEN action = 'undelegate' then (amount / power(10,6))*(-1) 
     else amount/power(10,6) end as staked
   FROM axelar.core.fact_staking
-  where currency LIKE 'uosmo'
+  where currency LIKE 'uaxl'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is NULL
 ), 
    stakes12 as (
@@ -83,7 +83,7 @@ stakes1 as (
     validator_address as validator,
     (amount / power(10,6)) as staked
   FROM axelar.core.fact_staking
-  where currency LIKE 'uosmo'
+  where currency LIKE 'uaxl'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is not null
 ),
    stakes3 as (
@@ -169,7 +169,7 @@ stakes1 as (
     REDELEGATE_SOURCE_VALIDATOR_ADDRESS as validator,
     (amount / power(10,6))*(-1) as staked
   FROM axelar.core.fact_staking
-  where currency LIKE 'uosmo'
+  where currency LIKE 'uaxl'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is not null
 ),
    stakes2 as (
@@ -180,7 +180,7 @@ stakes1 as (
     CASE WHEN action = 'undelegate' then (amount / power(10,6))*(-1) 
     else amount/power(10,6) end as staked
   FROM axelar.core.fact_staking
-  where currency LIKE 'uosmo'
+  where currency LIKE 'uaxl'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is NULL
 ), 
   stakes12 as (
@@ -190,7 +190,7 @@ stakes1 as (
     validator_address as validator,
     (amount / power(10,6)) as staked
   FROM axelar.core.fact_staking
-  where currency LIKE 'uosmo'
+  where currency LIKE 'uaxl'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is not null
 ),
    stakes3 as (
@@ -282,7 +282,7 @@ stakes1 as (
     REDELEGATE_SOURCE_VALIDATOR_ADDRESS as validator,
     (amount / power(10,6))*(-1) as staked
   FROM axelar.core.fact_staking
-  where currency LIKE 'uosmo'
+  where currency LIKE 'uaxl'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is not null
 ),
    stakes2 as (
@@ -293,7 +293,7 @@ stakes1 as (
     CASE WHEN action = 'undelegate' then (amount / power(10,6))*(-1) 
     else amount/power(10,6) end as staked
   FROM axelar.core.fact_staking
-  where currency LIKE 'uosmo'
+  where currency LIKE 'uaxl'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is NULL
 ), 
   stakes12 as (
@@ -471,7 +471,7 @@ sql2 = f"""
       min(trunc(block_timestamp,'day')) as debut
     FROM axelar.core.fact_staking
   	 JOIN axelar.core.dim_labels ON address = validator_address
-    where currency LIKE 'uosmo'
+    where currency LIKE 'uaxl'
     GROUP BY 1
 ),
    proposals_info as (
@@ -501,7 +501,7 @@ sql3="""
       min(trunc(block_timestamp,'day')) as debut
     FROM axelar.core.fact_staking
   	 JOIN axelar.core.dim_labels ON address = validator_address
-    where currency LIKE 'uosmo'
+    where currency LIKE 'uaxl'
     GROUP BY 1
 ),
    proposals_info as (
