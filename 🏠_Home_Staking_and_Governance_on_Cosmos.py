@@ -48,6 +48,7 @@ st.markdown("These includes:")
 st.markdown("1. **_Osmosis Governance activity_**") 
 st.markdown("2. **_Cosmos Governance activity_**")
 st.markdown("3. **_Terra Governance activity_**")
+st.markdown("4. **_Axelar Governance activity_**")
 
 
 # In[ ]:
