@@ -431,10 +431,9 @@ fig.update_yaxes(title_text="Daily voting power", secondary_y=False)
 st.plotly_chart(fig, theme="streamlit", use_container_width=True)
 
 
-# Create figure with secondary y-axis
 st.altair_chart(alt.Chart(df2)
         .mark_area()
-        .encode(x='days:N', y='power_share:Q',color='ranks')
+        .encode(x="days:N", y=alt.Y("power_share:Q",stack="normalize"),color='ranks')
         .properties(title='Power share distribution per validators rank',width=600))
 
 st.altair_chart(alt.Chart(df3)
