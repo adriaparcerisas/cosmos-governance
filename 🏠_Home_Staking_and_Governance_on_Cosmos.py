@@ -26,7 +26,7 @@ sdk = ShroomDK("7bfe27b2-e726-4d8d-b519-03abc6447728")
 # In[9]:
 
 
-st.title('Governing the Cosmos')
+st.title('Staking and Governance on Cosmos Ecosystem')
 
 
 # In[10]:
