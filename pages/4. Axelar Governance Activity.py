@@ -28,13 +28,13 @@ sdk = ShroomDK("7bfe27b2-e726-4d8d-b519-03abc6447728")
 # In[19]:
 
 
-st.title('Osmosis Governance Activity')
+st.title('Axelar Governance Activity')
 
 
 # In[20]:
 
 
-st.markdown('This page shows the basic governance activity trends on **Osmosis** chain. It is intended to provide an overview of the current activity and usage since inception.')
+st.markdown('This page shows the basic governance activity trends on **Axelar** chain. It is intended to provide an overview of the current activity and usage since inception.')
 
 
 # In[5]:
@@ -61,7 +61,7 @@ stakes1 as (
    tx_id,
     REDELEGATE_SOURCE_VALIDATOR_ADDRESS as validator,
     (amount / power(10,6))*(-1) as staked
-  FROM osmosis.core.fact_staking
+  FROM axelar.core.fact_staking
   where currency LIKE 'uosmo'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is not null
 ),
@@ -72,7 +72,7 @@ stakes1 as (
     validator_address as validator,
     CASE WHEN action = 'undelegate' then (amount / power(10,6))*(-1) 
     else amount/power(10,6) end as staked
-  FROM osmosis.core.fact_staking
+  FROM axelar.core.fact_staking
   where currency LIKE 'uosmo'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is NULL
 ), 
@@ -82,7 +82,7 @@ stakes1 as (
    tx_id,
     validator_address as validator,
     (amount / power(10,6)) as staked
-  FROM osmosis.core.fact_staking
+  FROM axelar.core.fact_staking
   where currency LIKE 'uosmo'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is not null
 ),
@@ -168,7 +168,7 @@ stakes1 as (
    tx_id,
     REDELEGATE_SOURCE_VALIDATOR_ADDRESS as validator,
     (amount / power(10,6))*(-1) as staked
-  FROM osmosis.core.fact_staking
+  FROM axelar.core.fact_staking
   where currency LIKE 'uosmo'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is not null
 ),
@@ -179,7 +179,7 @@ stakes1 as (
     validator_address as validator,
     CASE WHEN action = 'undelegate' then (amount / power(10,6))*(-1) 
     else amount/power(10,6) end as staked
-  FROM osmosis.core.fact_staking
+  FROM axelar.core.fact_staking
   where currency LIKE 'uosmo'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is NULL
 ), 
@@ -189,7 +189,7 @@ stakes1 as (
    tx_id,
     validator_address as validator,
     (amount / power(10,6)) as staked
-  FROM osmosis.core.fact_staking
+  FROM axelar.core.fact_staking
   where currency LIKE 'uosmo'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is not null
 ),
@@ -281,7 +281,7 @@ stakes1 as (
    tx_id,
     REDELEGATE_SOURCE_VALIDATOR_ADDRESS as validator,
     (amount / power(10,6))*(-1) as staked
-  FROM osmosis.core.fact_staking
+  FROM axelar.core.fact_staking
   where currency LIKE 'uosmo'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is not null
 ),
@@ -292,7 +292,7 @@ stakes1 as (
     validator_address as validator,
     CASE WHEN action = 'undelegate' then (amount / power(10,6))*(-1) 
     else amount/power(10,6) end as staked
-  FROM osmosis.core.fact_staking
+  FROM axelar.core.fact_staking
   where currency LIKE 'uosmo'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is NULL
 ), 
@@ -302,7 +302,7 @@ stakes1 as (
    tx_id,
     validator_address as validator,
     (amount / power(10,6)) as staked
-  FROM osmosis.core.fact_staking
+  FROM axelar.core.fact_staking
   where currency LIKE 'uosmo'
   AND REDELEGATE_SOURCE_VALIDATOR_ADDRESS is not null
 ),
@@ -454,7 +454,7 @@ WITH
   select 
 distinct proposal_id,
 min(block_timestamp)as debut
-from osmosis.core.fact_governance_proposal_deposits 
+from axelar.core.fact_governance_proposal_deposits 
   group by 1
   )
 select trunc(debut,'week') as weeks,
@@ -469,8 +469,8 @@ sql2 = f"""
  SELECT 
   	  raw_metadata[0]['account_address'] as validator_address,
       min(trunc(block_timestamp,'day')) as debut
-    FROM osmosis.core.fact_staking
-  	 JOIN osmosis.core.dim_labels ON address = validator_address
+    FROM axelar.core.fact_staking
+  	 JOIN axelar.core.dim_labels ON address = validator_address
     where currency LIKE 'uosmo'
     GROUP BY 1
 ),
@@ -480,7 +480,7 @@ SELECT
     voter,
     block_timestamp,
    tx_id
-  FROM osmosis.core.fact_governance_votes
+  FROM axelar.core.fact_governance_votes
    )
 SELECT
 trunc(block_timestamp,'day') as date,
@@ -499,8 +499,8 @@ sql3="""
  SELECT 
   	  raw_metadata[0]['account_address'] as validator_address,
       min(trunc(block_timestamp,'day')) as debut
-    FROM osmosis.core.fact_staking
-  	 JOIN osmosis.core.dim_labels ON address = validator_address
+    FROM axelar.core.fact_staking
+  	 JOIN axelar.core.dim_labels ON address = validator_address
     where currency LIKE 'uosmo'
     GROUP BY 1
 ),
@@ -510,7 +510,7 @@ SELECT
     voter,
     block_timestamp,
    tx_id
-  FROM osmosis.core.fact_governance_votes
+  FROM axelar.core.fact_governance_votes
    ),
    final as (
 SELECT
@@ -555,7 +555,7 @@ fig3.add_trace(go.Line(x=df['weeks'],
                 , yaxis='y2'))
 
 fig3.update_layout(
-    title='Osmosis proposals evolution',
+    title='Axelar proposals evolution',
     xaxis_tickfont_size=14,
     legend=dict(
         x=0,
@@ -608,7 +608,7 @@ count (distinct voter) as voters,
 count(distinct tx_id) as votes,
  sum(case when vote_weight is null then 0
 else vote_weight end) as weight
-from osmosis.core.fact_governance_votes
+from axelar.core.fact_governance_votes
 group by 1,2
 order by 1 asc
 """
@@ -619,14 +619,14 @@ WITH
   select 
   distinct tx_from as user,
   min(block_timestamp) as debut
-  from osmosis.core.fact_transactions
+  from axelar.core.fact_transactions
   group by 1
   ),
   votes as (
 SELECT
 distinct voter as user,
   min(block_timestamp) as governance_debut
-from osmosis.core.fact_governance_votes
+from axelar.core.fact_governance_votes
 group by 1
   ),
   final as (
@@ -649,14 +649,14 @@ WITH
   select 
   distinct tx_from as user,
   min(block_timestamp) as debut
-  from osmosis.core.fact_transactions
+  from axelar.core.fact_transactions
   group by 1
   ),
   votes as (
 SELECT
 distinct voter as user,
   min(block_timestamp) as governance_debut
-from osmosis.core.fact_governance_votes
+from axelar.core.fact_governance_votes
 group by 1
   ),
   final as (
@@ -684,7 +684,7 @@ SELECT
 distinct voter as user,
   min(block_timestamp) as debut,
 count(distinct proposal_id) as n_proposals
-from osmosis.core.fact_governance_votes
+from axelar.core.fact_governance_votes
 group by 1
   )
 SELECT
@@ -702,7 +702,7 @@ WITH
   SELECT
   distinct voter as active_user,
   min(block_timestamp) as debut
-  from osmosis.core.fact_governance_votes
+  from axelar.core.fact_governance_votes
   group by 1
   ),
   proposals as (
@@ -711,7 +711,7 @@ WITH
   min(block_timestamp) as proposal_debut,
   count(distinct tx_id) as votes,
   count(distinct voter) as participants
-  from osmosis.core.fact_governance_votes
+  from axelar.core.fact_governance_votes
   group by 1
   )
 SELECT
