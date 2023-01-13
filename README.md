@@ -18,3 +18,9 @@ Here you will find the following information about Cosmos Ecosystem:
 - Power share distribution by validators rank
 - How did the Nakamoto Coefficient change?
 - Validators and delegators activity
+
+3. ### Axelar Governance activity
+- How did the voting power of the top 66% of the active set validators change?
+- Power share distribution by validators rank
+- How did the Nakamoto Coefficient change?
+- Validators and delegators activity
