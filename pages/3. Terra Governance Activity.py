@@ -450,20 +450,21 @@ group by 1 order by 1 asc
 
 
 st.experimental_memo(ttl=21600)
+@st.cache
 def compute(a):
     data=sdk.query(a)
     return data
 
-results = compute(sql)
-df = pd.DataFrame(results.records)
+data = compute(sql)
+df = pd.DataFrame(data.records)
 df.info()
 
-results2 = compute(sql2)
-df2 = pd.DataFrame(results2.records)
+data2 = compute(sql2)
+df2 = pd.DataFrame(data2.records)
 df2.info()
 
-results3 = compute(sql3)
-df3 = pd.DataFrame(results3.records)
+data3 = compute(sql3)
+df3 = pd.DataFrame(data3.records)
 df3.info()
 #st.subheader('Terra general activity metrics regarding transactions')
 #st.markdown('In this first part, we can take a look at the main activity metrics on Terra, where it can be seen how the number of transactions done across the protocol, as well as some other metrics such as fees and TPS.')
@@ -588,16 +589,16 @@ trunc(date,'week') as weeks, type,avg(votes) as avg_votes_per_voter
 from final group by 1,2 order by 1 asc 
 """
 
-results = compute(sql)
-df = pd.DataFrame(results.records)
+data = compute(sql)
+df = pd.DataFrame(data.records)
 df.info()
 
-results2 = compute(sql2)
-df2 = pd.DataFrame(results2.records)
+data2 = compute(sql2)
+df2 = pd.DataFrame(data2.records)
 df2.info()
 
-results3 = compute(sql3)
-df3 = pd.DataFrame(results3.records)
+data3 = compute(sql3)
+df3 = pd.DataFrame(data3.records)
 df3.info()
 
 #Create figure with secondary y-axis
@@ -784,24 +785,24 @@ group by 1,2,3,4
 order by 1 asc
 """
 
-results = compute(sql)
-df = pd.DataFrame(results.records)
+data = compute(sql)
+df = pd.DataFrame(data.records)
 df.info()
 
-results2 = compute(sql2)
-df2 = pd.DataFrame(results2.records)
+data2 = compute(sql2)
+df2 = pd.DataFrame(data2.records)
 df2.info()
 
-results3 = compute(sql3)
-df3 = pd.DataFrame(results3.records)
+data3 = compute(sql3)
+df3 = pd.DataFrame(data3.records)
 df3.info()
 
-results4 = compute(sql4)
-df4 = pd.DataFrame(results4.records)
+data4 = compute(sql4)
+df4 = pd.DataFrame(data4.records)
 df4.info()
 
-results5 = compute(sql5)
-df5 = pd.DataFrame(results5.records)
+data5 = compute(sql5)
+df5 = pd.DataFrame(data5.records)
 df5.info()
 
 
