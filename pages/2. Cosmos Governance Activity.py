@@ -458,6 +458,7 @@ group by 1 order by 1 asc
 # In[11]:
 
 st.experimental_memo(ttl=21600)
+@st.cache
 def compute(a):
     data=sdk.query(a)
     return data
@@ -604,16 +605,16 @@ trunc(date,'week') as weeks, type,avg(votes) as avg_votes_per_voter
 from final group by 1,2 order by 1 asc 
 """
 
-results = compute(sql)
-df = pd.DataFrame(results.records)
+data = compute(sql)
+df = pd.DataFrame(data.records)
 df.info()
 
-results2 = compute(sql2)
-df2 = pd.DataFrame(results2.records)
+data2 = compute(sql2)
+df2 = pd.DataFrame(data2.records)
 df2.info()
 
-results3 = compute(sql3)
-df3 = pd.DataFrame(results3.records)
+data3 = compute(sql3)
+df3 = pd.DataFrame(data3.records)
 df3.info()
 
 #Create figure with secondary y-axis
